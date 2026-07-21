@@ -53,13 +53,12 @@
             position: fixed; top: 0; width: 100%; padding: 1.5rem 4%;
             display: flex; justify-content: space-between; align-items: center;
             z-index: 1000;
-            /* Ligero oscurecimiento solo en la parte superior para que los links se lean siempre */
             background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, transparent 100%);
         }
 
         /* Logo Glassmorphism (Transparente al fondo) */
         .logo-wrapper {
-            background: rgba(255, 255, 255, 0.15); /* Muy transparente */
+            background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
             padding: 8px 25px; 
@@ -69,7 +68,7 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
-        /* LOGO MUCHO MÁS GRANDE */
+        /* LOGO GRANDE */
         .logo-wrapper img { height: 75px; }
 
         .nav-center {
@@ -81,7 +80,7 @@
             color: var(--text-main); text-decoration: none;
             font-size: 0.75rem; font-weight: 600; letter-spacing: 1.5px;
             text-transform: uppercase; transition: color 0.3s;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.8); /* Sombra para que resalte en cualquier fondo */
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
         }
 
         .nav-center a:hover { color: #d4d4d8; }
@@ -98,18 +97,18 @@
             letter-spacing: 1px; text-transform: uppercase;
             transition: all 0.3s ease; cursor: pointer;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            display: inline-block;
         }
 
         .btn-glass:hover { background: rgba(255, 255, 255, 0.2); transform: translateY(-2px); }
         .btn-glass.red { border-color: rgba(239, 68, 68, 0.6); color: #ff9999; background: rgba(239, 68, 68, 0.15); }
         .btn-glass.red:hover { background: rgba(239, 68, 68, 0.3); }
 
-        /* --- SECCIÓN HERO (CON FADE AL NEGRO) --- */
+        /* --- SECCIÓN HERO --- */
         .hero {
             min-height: 100vh; display: flex; flex-direction: column;
             justify-content: center; padding: 0 8%; position: relative;
             z-index: 1;
-            /* Aquí ocurre la magia: Inicia casi transparente y termina en negro sólido abajo */
             background: linear-gradient(to bottom, rgba(5,5,5,0.1) 0%, rgba(5,5,5,0.3) 60%, var(--bg-dark) 100%);
         }
 
@@ -134,7 +133,7 @@
 
         .hero-buttons { display: flex; gap: 1rem; }
 
-        /* --- CONTENEDOR DE FONDO SÓLIDO (Todo lo que está debajo del inicio) --- */
+        /* --- CONTENEDOR DE FONDO SÓLIDO --- */
         .solid-bg-sections {
             background-color: var(--bg-dark);
             position: relative;
@@ -187,7 +186,7 @@
             .hero h1 { font-size: 2.5rem; }
             .hero { padding-top: 150px; }
             .content-card { padding: 1.5rem; }
-            .logo-wrapper img { height: 50px; } /* Ajuste del logo para celular */
+            .logo-wrapper img { height: 50px; }
         }
     </style>
 </head>
@@ -212,7 +211,7 @@
         </div>
     </nav>
 
-    <!-- INICIO (Aquí se ve la imagen y se empieza a difuminar al llegar abajo) -->
+    <!-- INICIO -->
     <section class="hero" id="inicio">
         <div class="hero-badge">Iniciativa Universitaria</div>
         <h1>¡BIENVENIDOS A AREQUIPA ROMPE EL SILENCIO!</h1>
@@ -224,7 +223,7 @@
         </div>
     </section>
 
-    <!-- A partir de aquí, el fondo se vuelve negro sólido -->
+    <!-- FONDO SÓLIDO PARA EL RESTO DE SECCIONES -->
     <div class="solid-bg-sections">
 
         <!-- QUIÉNES SOMOS -->
@@ -322,21 +321,31 @@
             </div>
         </section>
 
-        <!-- DIRECTORIO DE AYUDA -->
+        <!-- DIRECTORIO DE AYUDA (ACTUALIZADO CON TEXTO DE IMAGEN Y BOTÓN IG) -->
         <section class="section-container" id="ayuda">
-            <h2 class="section-title">¡No guardes silencio! Busca ayuda</h2>
-            <div class="grid-layout">
-                <div class="grid-card" style="text-align: center; border-color: rgba(239,68,68,0.3);">
-                    <h3>📞 Línea 100</h3>
-                    <p style="font-size: 0.9rem; color: var(--text-muted);">Atención gratuita 24/7.</p>
+            <h2 class="section-title">¿Necesitas Ayuda?</h2>
+            <div class="content-card" style="border-color: rgba(239, 68, 68, 0.4);">
+                <p style="font-size: 1.1rem; margin-bottom: 1.5rem; font-weight: 600; color: #fff;">
+                    Saber a dónde acudir puede marcar la diferencia. Si estás pasando por una situación de riesgo o conoces a alguien que lo necesita, aquí tienes canales de atención gratuitos y confidenciales:
+                </p>
+                
+                <ul style="list-style-type: disc; margin-left: 1.5rem; margin-bottom: 2rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 1rem;">
+                    <li><strong style="color: #fff;">LÍNEA 100:</strong> Atención gratuita las 24 horas, los 365 días del año.</li>
+                    <li><strong style="color: #fff;">CENTROS EMERGENCIA MUJER (CEM):</strong> Atención integral (legal, psicológica y social) en comisarías y centros de salud de Arequipa.</li>
+                    <li><strong style="color: #fff;">DEFENSORÍA DEL PUEBLO Y PODER JUDICIAL:</strong> Para dar seguimiento e informar denuncias.</li>
+                </ul>
+
+                <!-- Aviso de fuente no oficial -->
+                <div style="margin-top: 2rem; padding: 1.2rem; background: rgba(239, 68, 68, 0.1); border-radius: 10px; border: 1px solid rgba(239, 68, 68, 0.3); font-size: 0.9rem; margin-bottom: 2rem;">
+                    ⚠️ <strong>Aviso importante:</strong> Este sitio web es un espacio informativo y de concientización, no somos una fuente de ayuda oficial directa. Si necesitas asistencia inmediata o estás en riesgo, por favor acude a las opciones mostradas o comunícate con las autoridades.
                 </div>
-                <div class="grid-card" style="text-align: center; border-color: rgba(239,68,68,0.3);">
-                    <h3>📍 Centros Emergencia Mujer</h3>
-                    <p style="font-size: 0.9rem; color: var(--text-muted);">CEM en Arequipa. Atención integral.</p>
-                </div>
-                <div class="grid-card" style="text-align: center; border-color: rgba(239,68,68,0.3);">
-                    <h3>📱 Redes Sociales</h3>
-                    <p style="font-size: 0.9rem; color: var(--text-muted);">@arequiparompelsilencio</p>
+
+                <!-- Botón de Redes Sociales / Instagram -->
+                <div style="text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem;">
+                    <p style="margin-bottom: 1rem; color: var(--text-muted);">Para más información, síguenos:</p>
+                    <a href="https://www.instagram.com/rompelsilencio.aqp/" target="_blank" class="btn-glass red">
+                        📸 Síguenos en Instagram (@rompelsilencio.aqp)
+                    </a>
                 </div>
             </div>
         </section>
@@ -346,7 +355,7 @@
             <p style="font-size: 0.8rem; color: var(--text-muted); max-width: 600px; margin: 0 auto;">Arequipa Rompe el Silencio. Proyecto informativo y de concientización social.</p>
         </footer>
 
-    </div> <!-- FIN DE SOLID BG SECTIONS -->
+    </div>
 
     <!-- BOTÓN FLOTANTE PERMANENTE -->
     <a href="#ayuda" class="floating-btn">🚨 SOS Ayuda</a>
