@@ -4,351 +4,331 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Arequipa Rompe el Silencio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Poppins:wght@700&display=swap" rel="stylesheet">
     
     <style>
         /* --- VARIABLES Y RESET --- */
         :root {
-            --bg-dark: #0a0a0a;
-            --glass-bg: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
-            --text-main: #f3f4f6;
-            --text-muted: #9ca3af;
+            --bg-dark: #050505;
+            --text-main: #f9f9f9;
+            --text-muted: #a1a1aa;
             --accent-red: #ef4444;
-            --accent-red-glass: rgba(239, 68, 68, 0.2);
-            --accent-blue: #3b82f6;
+            --glass-btn-bg: rgba(255, 255, 255, 0.05);
+            --glass-btn-border: rgba(255, 255, 255, 0.2);
+            --card-bg: rgba(15, 15, 15, 0.85); /* Fondo sólido translúcido para evitar lag */
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Inter', sans-serif;
         }
 
-        /* SCROLL SUAVIZADO Y ESTILIZADO */
         html {
-            scroll-behavior: smooth; /* Suaviza la subida y bajada */
-        }
-        
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-        ::-webkit-scrollbar-track {
-            background: var(--bg-dark);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: rgba(255,255,255,0.2);
-            border-radius: 10px;
+            scroll-behavior: smooth; /* Scroll fluido */
         }
 
         body {
-            background-color: var(--bg-dark);
-            background-image: radial-gradient(circle at 50% 0%, rgba(30, 30, 30, 1) 0%, rgba(10, 10, 10, 1) 80%);
             color: var(--text-main);
             line-height: 1.6;
-            min-height: 100vh;
+            overflow-x: hidden;
+            background-color: var(--bg-dark);
         }
 
-        /* --- EFECTO LIQUID GLASS GENERAL --- */
-        .glass-panel {
-            background: var(--glass-bg);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            box-shadow: var(--glass-shadow);
+        /* SCROLLBAR PERSONALIZADO */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-dark); }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 4px; }
+
+        /* --- FONDO OPTIMIZADO PARA CERO LAG --- */
+        .fixed-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            /* REEMPLAZA AQUÍ LA IMAGEN DE FONDO */
+            background-image: url('ruta-a-tu-imagen.jpg'); 
+            background-size: cover;
+            background-position: center;
+            z-index: -2;
         }
 
-        /* --- NAVEGACIÓN --- */
+        .bg-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(to right, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.5) 100%);
+            z-index: -1;
+        }
+
+        /* --- NAVEGACIÓN (ESTILO PORTAFOLIO) --- */
         nav {
             position: fixed;
             top: 0;
             width: 100%;
-            padding: 1rem 5%;
+            padding: 1.2rem 4%;
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 1000;
-            background: rgba(10, 10, 10, 0.7);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--glass-border);
+            background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
         }
 
-        /* Contenedor del logo para que resalte en fondo negro */
         .logo-wrapper {
-            background: rgba(255, 255, 255, 0.85); /* Fondo blanco translúcido */
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             padding: 5px 15px;
-            border-radius: 30px;
+            border-radius: 50px;
             display: flex;
             align-items: center;
-            box-shadow: 0 4px 15px rgba(255,255,255,0.1);
         }
 
         .logo-wrapper img {
-            height: 40px;
+            height: 35px;
         }
 
-        .nav-links {
+        .nav-center {
             display: flex;
-            gap: 1.5rem;
+            gap: 2.5rem;
             list-style: none;
-            align-items: center;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
         }
 
-        .nav-links a {
+        .nav-center a {
             color: var(--text-main);
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.75rem;
             font-weight: 600;
-            transition: color 0.3s ease;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            transition: color 0.3s;
         }
 
-        .nav-links a:hover {
+        .nav-center a:hover {
             color: var(--text-muted);
         }
 
-        /* Botón de Ayuda en el Menú */
-        .btn-nav-help {
-            background: var(--accent-red-glass);
-            border: 1px solid var(--accent-red);
-            color: #ff8a8a !important;
-            padding: 0.5rem 1.2rem;
+        .nav-right {
+            display: flex;
+        }
+
+        /* --- BOTONES LIQUID GLASS --- */
+        .btn-glass {
+            background: var(--glass-btn-bg);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid var(--glass-btn-border);
+            color: white;
+            padding: 0.6rem 1.5rem;
             border-radius: 50px;
-            text-transform: uppercase;
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 600;
             letter-spacing: 1px;
-            animation: pulse 2s infinite;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            cursor: pointer;
         }
 
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
-            70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+        .btn-glass:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
         }
 
-        /* --- SECCIÓN 1: INICIO --- */
+        .btn-glass.red {
+            border-color: rgba(239, 68, 68, 0.5);
+            color: #ff8a8a;
+        }
+        
+        .btn-glass.red:hover {
+            background: rgba(239, 68, 68, 0.2);
+        }
+
+        /* --- SECCIÓN 1: INICIO (HERO LEFT ALIGNED) --- */
         .hero {
-            padding: 180px 10% 100px 10%;
-            text-align: center;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            align-items: center;
+            justify-content: center;
+            padding: 0 8%;
+            position: relative;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            width: fit-content;
         }
 
         .hero h1 {
-            font-size: clamp(3rem, 6vw, 5rem);
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(3rem, 6vw, 5.5rem);
             font-weight: 800;
             line-height: 1.1;
             margin-bottom: 1.5rem;
-            letter-spacing: -1px;
-            background: linear-gradient(135deg, #ffffff 0%, #a3a3a3 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            max-width: 900px;
         }
 
         .hero p {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: var(--text-muted);
-            max-width: 700px;
-            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-bottom: 2.5rem;
         }
 
         .hero-buttons {
             display: flex;
-            gap: 1.5rem;
-            margin-bottom: 4rem;
+            gap: 1rem;
         }
 
-        .btn-primary {
-            background: var(--accent-red);
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
-            transition: transform 0.3s;
-        }
-
-        .btn-glass {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            backdrop-filter: blur(10px);
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: background 0.3s;
-        }
-
-        .btn-primary:hover, .btn-glass:hover {
-            transform: translateY(-3px);
-            background: rgba(255,255,255,0.1);
-        }
-
-        /* Tarjetas de Impacto */
-        .impact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            width: 100%;
-            max-width: 1200px;
-        }
-
-        .impact-card {
-            padding: 2rem;
-            text-align: left;
-        }
-        .impact-card h3 { font-size: 1.2rem; margin-bottom: 1rem; color: #fff; }
-
-        /* --- CONTENEDOR GENERAL PARA SECCIONES --- */
+        /* --- CONTENEDORES Y TARJETAS LIGERAS (SIN LAG) --- */
         .section-container {
-            max-width: 1000px;
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 4rem 5%;
+            padding: 6rem 5%;
         }
 
         .section-title {
+            font-family: 'Poppins', sans-serif;
             font-size: 2.5rem;
-            margin-bottom: 2rem;
-            text-align: center;
-            font-weight: 800;
-        }
-
-        /* --- SECCIÓN 2 & 3: QUIÉNES SOMOS E INVESTIGACIÓN --- */
-        .content-box {
-            padding: 3rem;
             margin-bottom: 3rem;
-        }
-        
-        .content-box h4 {
-            color: var(--accent-blue);
-            margin-top: 1.5rem;
-            margin-bottom: 0.5rem;
+            font-weight: 700;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 1rem;
         }
 
-        .data-highlight {
-            font-size: 2rem;
-            font-weight: 800;
-            color: var(--accent-red);
-            display: block;
+        /* Tarjetas sólidas y fluidas */
+        .content-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 3rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        /* --- SECCIÓN 4: GUÍA INFORMATIVA --- */
-        .guide-grid {
+        /* Grid para Impacto, Guía y Ayuda */
+        .grid-layout {
             display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 1.5rem;
         }
 
-        .guide-card {
+        .grid-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.05);
             padding: 2rem;
-            border-left: 4px solid var(--accent-blue);
-        }
-
-        .alert-signal {
-            margin-top: 1rem;
-            padding: 1rem;
-            background: rgba(239, 68, 68, 0.1);
             border-radius: 12px;
-            border: 1px solid rgba(239, 68, 68, 0.2);
-            font-size: 0.9rem;
         }
 
-        /* --- SECCIÓN 5: CANALES DE AYUDA --- */
-        .help-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-        
-        .help-card {
-            padding: 2rem;
-            text-align: center;
+        .grid-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: #fff;
         }
 
-        .help-number {
+        .highlight-data {
             font-size: 2.5rem;
             font-weight: 800;
             color: var(--accent-red);
-            margin: 1rem 0;
+            font-family: 'Poppins', sans-serif;
         }
 
-        /* --- FOOTER & BOTÓN FLOTANTE --- */
-        footer {
-            padding: 3rem 5%;
-            text-align: center;
-            border-top: 1px solid var(--glass-border);
-            margin-top: 4rem;
-        }
-
-        .legal-notice {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
+        /* --- BOTÓN FLOTANTE --- */
         .floating-btn {
             position: fixed;
             bottom: 30px;
             right: 30px;
-            background: var(--accent-red);
+            z-index: 1000;
+            background: rgba(239, 68, 68, 0.2);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--accent-red);
             color: white;
             padding: 1rem 2rem;
             border-radius: 50px;
             text-decoration: none;
-            font-weight: 800;
-            box-shadow: 0 10px 25px rgba(239, 68, 68, 0.5);
-            z-index: 1000;
+            font-weight: 600;
+            box-shadow: 0 10px 25px rgba(239, 68, 68, 0.3);
             transition: transform 0.3s;
         }
 
         .floating-btn:hover {
             transform: scale(1.05);
+            background: rgba(239, 68, 68, 0.4);
         }
 
+        /* --- MEDIA QUERIES --- */
+        @media (max-width: 900px) {
+            .nav-center { display: none; }
+            .hero h1 { font-size: 3rem; }
+            .hero { padding-top: 120px; }
+            .content-card { padding: 1.5rem; }
+        }
     </style>
 </head>
 <body>
 
+    <!-- FONDO OPTIMIZADO PARA SCROLL FLUIDO -->
+    <div class="fixed-bg"></div>
+    <div class="bg-overlay"></div>
+
     <!-- NAVEGACIÓN -->
     <nav>
         <div class="logo-wrapper">
-            <!-- Referencia al archivo solicitado -->
-            <img src="image_0d81fd.png" alt="Logo Rompe el Silencio">
+            <img src="image_0d81fd.png" alt="Logo">
         </div>
-        <ul class="nav-links">
+        
+        <ul class="nav-center">
             <li><a href="#inicio">Inicio</a></li>
             <li><a href="#quienes-somos">Quiénes Somos</a></li>
             <li><a href="#investigacion">Investigación</a></li>
-            <li><a href="#guia">Tipos de Violencia</a></li>
-            <li><a href="#ayuda" class="btn-nav-help">🚨 ¿Necesitas Ayuda?</a></li>
+            <li><a href="#ayuda">Directorio</a></li>
         </ul>
+
+        <div class="nav-right">
+            <a href="#ayuda" class="btn-glass red">¿Necesitas Ayuda?</a>
+        </div>
     </nav>
 
     <!-- SECCIÓN 1: INICIO -->
     <section class="hero" id="inicio">
-        <!-- -->
-        <h1>AREQUIPA ROMPE EL SILENCIO</h1>
-        <p>Una iniciativa para informar, concientizar y prevenir la violencia en todas sus formas en nuestra región.</p>
+        <div class="hero-badge">Iniciativa de Prevención</div>
+        <h1>Arequipa rompe<br>el silencio.</h1>
+        <p>Una iniciativa para informar, concientizar y prevenir la violencia en todas sus formas en nuestra región. Reconoce las señales, conoce los datos y encuentra apoyo.</p>
         
         <div class="hero-buttons">
-            <a href="#ayuda" class="btn-primary">🚨 ¿Necesitas Ayuda Inmediata?</a>
-            <a href="#investigacion" class="btn-glass">📊 Conoce los Datos</a>
+            <a href="#investigacion" class="btn-glass">Conoce los Datos</a>
+            <a href="#guia" class="btn-glass">Tipos de Violencia</a>
         </div>
+    </section>
 
-        <div class="impact-grid">
-            <div class="impact-card glass-panel">
+    <!-- IMPACTO RÁPIDO -->
+    <section class="section-container" style="padding-top: 0;">
+        <div class="grid-layout">
+            <div class="grid-card">
                 <h3>🧠 Información y Educación</h3>
                 <p class="text-muted">Identifica las señales de violencia psicológica, física, digital y social a tu alrededor.</p>
             </div>
-            <div class="impact-card glass-panel">
+            <div class="grid-card">
                 <h3>📊 Evidencia e Investigación</h3>
                 <p class="text-muted">Datos reales sobre la situación de la violencia en la región Arequipa.</p>
             </div>
-            <div class="impact-card glass-panel">
+            <div class="grid-card">
                 <h3>🤝 Red de Apoyo</h3>
                 <p class="text-muted">Canales oficiales y gratuitos de atención y denuncia a tu alcance.</p>
             </div>
@@ -357,150 +337,104 @@
 
     <!-- SECCIÓN 2: QUIÉNES SOMOS -->
     <section class="section-container" id="quienes-somos">
-        <h2 class="section-title">¿Quiénes Somos?</h2>
-        <div class="glass-panel content-box">
-            <!-- -->
-            <p><strong>Nuestra Misión:</strong> Arequipa Rompe el Silencio nace como un proyecto impulsado por estudiantes comprometidos con la transformación social de nuestra ciudad. Reconocemos que la violencia no es un asunto privado ni aislado; es un problema estructural que afecta la salud mental, el desarrollo y la seguridad de miles de personas en Arequipa.</p>
+        <h2 class="section-title">Nuestra Misión</h2>
+        <div class="content-card">
+            <p><strong>Arequipa Rompe el Silencio</strong> nace como un proyecto impulsado por estudiantes comprometidos con la transformación social de nuestra ciudad. Reconocemos que la violencia no es un asunto privado ni aislado; es un problema estructural que afecta la salud mental, el desarrollo y la seguridad de miles de personas en Arequipa.</p>
             <br>
             <p>Aunque nuestro estudio inicial se profundizó en la violencia familiar, abarcamos la <strong>violencia en todas sus manifestaciones: escolar, laboral, digital, callejera y de género.</strong> Queremos transformar las cifras en herramientas de prevención y acción comunitaria.</p>
-            <div style="margin-top: 2rem; padding: 2rem; background: rgba(255,255,255,0.02); border-radius: 12px; text-align: center; border: 1px dashed var(--glass-border);">
-                <em>[Espacio para: Foto o ilustración del equipo de investigación]</em>
-            </div>
         </div>
     </section>
 
     <!-- SECCIÓN 3: LA INVESTIGACIÓN -->
     <section class="section-container" id="investigacion">
         <h2 class="section-title">Estudio Estadístico</h2>
-        <div class="glass-panel content-box">
-            <!-- -->
-            <p>Presentamos el resumen ejecutivo y el informe completo de nuestra investigación sobre el panorama de la violencia en Arequipa. Los datos reflejan la urgencia de romper el silencio e intervenir desde la educación y la prevención.</p>
-            
-            <h4>📍 2.° Lugar Nacional</h4>
-            <p>Arequipa se posiciona entre las regiones con mayor índice de denuncias por violencia en el Perú.</p>
-            
-            <h4>⚠️ Prevalencia del Tipo de Agresión</h4>
-            <p><span class="data-highlight">50.8%</span> Violencia Psicológica en los casos reportados.</p>
-            <p><span class="data-highlight">33.6%</span> Violencia Física en los casos reportados.</p>
-            
-            <h4>🎭 Normalización Cultural</h4>
-            <p>Gran parte de las agresiones son justificadas o invisibilizadas bajo la excusa de "estilos de crianza tradicionales" o costumbres sociales.</p>
-
-            <div style="margin-top: 3rem; text-align: center;">
-                <p><em>Consulta nuestra investigación completa presentada en formato de informe ejecutivo:</em></p>
-                <div style="height: 200px; background: rgba(0,0,0,0.5); margin: 1rem 0; border-radius: 12px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--glass-border);">
-                    [Componente Interactivo: Visor PDF Embebido]
+        <div class="content-card">
+            <p>Presentamos el resumen ejecutivo y el informe completo de nuestra investigación sobre el panorama de la violencia en Arequipa.</p>
+            <br>
+            <div style="display: flex; gap: 2rem; flex-wrap: wrap; margin-bottom: 2rem;">
+                <div>
+                    <span class="highlight-data">2.°</span>
+                    <p>Lugar nacional en índice de denuncias.</p>
                 </div>
-                <a href="#" class="btn-glass">📄 Descargar Informe Completo (PDF)</a>
+                <div>
+                    <span class="highlight-data">50.8%</span>
+                    <p>Violencia Psicológica reportada.</p>
+                </div>
+                <div>
+                    <span class="highlight-data">33.6%</span>
+                    <p>Violencia Física reportada.</p>
+                </div>
+            </div>
+            
+            <p><strong>🎭 Normalización Cultural:</strong> Gran parte de las agresiones son justificadas o invisibilizadas bajo la excusa de "estilos de crianza tradicionales" o costumbres sociales.</p>
+
+            <div style="margin-top: 3rem; text-align: left;">
+                <div style="height: 150px; background: rgba(0,0,0,0.8); margin: 1rem 0; border-radius: 12px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.1);">
+                    [Visor PDF Embebido]
+                </div>
+                <a href="#" class="btn-glass" style="display: inline-block;">📄 Descargar Informe (PDF)</a>
             </div>
         </div>
     </section>
 
     <!-- SECCIÓN 4: GUÍA INFORMATIVA -->
     <section class="section-container" id="guia">
-        <h2 class="section-title">Guía Informativa: Tipos de Violencia</h2>
-        <div class="guide-grid">
-            <!-- -->
-            <div class="guide-card glass-panel">
-                <h3>1. Violencia Psicológica y Emocional</h3>
-                <p><strong>Descripción:</strong> Humillaciones, control excesivo, chantaje afectivo, insultos o manipulación.</p>
-                <div class="alert-signal"><strong>Señal de Alerta:</strong> Te hace dudar de tu criterio, aísla tu red de contactos o invalida lo que sientes.</div>
+        <h2 class="section-title">Tipos de Violencia</h2>
+        <div class="grid-layout">
+            <div class="grid-card">
+                <h3>1. Psicológica y Emocional</h3>
+                <p style="font-size: 0.9rem; color: var(--text-muted);">Humillaciones, control excesivo, chantaje afectivo, insultos o manipulación.</p>
+                <div style="margin-top: 1rem; padding: 1rem; border-left: 2px solid var(--accent-red); background: rgba(239, 68, 68, 0.05); font-size: 0.85rem;">
+                    <strong>Alerta:</strong> Te hace dudar de tu criterio, aísla tu red de contactos o invalida lo que sientes.
+                </div>
             </div>
-
-            <!-- -->
-            <div class="guide-card glass-panel">
-                <h3>2. Violencia Física</h3>
-                <p><strong>Descripción:</strong> Cualquier acción que use la fuerza corporal para causar daño o coacción.</p>
-                <div class="alert-signal"><strong>Señal de Alerta:</strong> Empujones, tirones, golpes o restricción del movimiento físico.</div>
+            <div class="grid-card">
+                <h3>2. Física</h3>
+                <p style="font-size: 0.9rem; color: var(--text-muted);">Cualquier acción que use la fuerza corporal para causar daño o coacción.</p>
+                <div style="margin-top: 1rem; padding: 1rem; border-left: 2px solid var(--accent-red); background: rgba(239, 68, 68, 0.05); font-size: 0.85rem;">
+                    <strong>Alerta:</strong> Empujones, tirones, golpes o restricción del movimiento físico.
+                </div>
             </div>
-
-            <!-- -->
-            <div class="guide-card glass-panel">
-                <h3>3. Violencia Digital y Acoso en Redes</h3>
-                <p><strong>Descripción:</strong> Hostigamiento en línea, difusión no consentida de material privado, control de contraseñas o ciberacoso.</p>
-                <div class="alert-signal"><strong>Señal de Alerta:</strong> Exigencia de ubicación en tiempo real o acoso sistemático por mensajería.</div>
-            </div>
-
-            <!-- -->
-            <div class="guide-card glass-panel">
-                <h3>4. Acoso Callejero y Urbano</h3>
-                <p><strong>Descripción:</strong> Comentarios sexuales no deseados, persecución o exhibicionismo en espacios públicos y transporte.</p>
-            </div>
-
-            <!-- -->
-            <div class="guide-card glass-panel">
-                <h3>5. Violencia Escolar y Laboral (Bullying / Mobbing)</h3>
-                <p><strong>Descripción:</strong> Hostigamiento, exclusión sistemática o maltrato psicológico en centros de estudio o trabajo.</p>
+            <div class="grid-card">
+                <h3>3. Digital y Redes</h3>
+                <p style="font-size: 0.9rem; color: var(--text-muted);">Hostigamiento en línea, difusión no consentida, control de contraseñas.</p>
+                <div style="margin-top: 1rem; padding: 1rem; border-left: 2px solid var(--accent-red); background: rgba(239, 68, 68, 0.05); font-size: 0.85rem;">
+                    <strong>Alerta:</strong> Exigencia de ubicación en tiempo real o acoso sistemático por mensajería.
+                </div>
             </div>
         </div>
     </section>
 
     <!-- SECCIÓN 5: CANALES DE AYUDA -->
     <section class="section-container" id="ayuda">
-        <h2 class="section-title">Canales de Ayuda (Directorio Arequipa)</h2>
-        <div class="help-grid">
-            <!-- -->
-            <div class="help-card glass-panel">
+        <h2 class="section-title">Directorio de Ayuda</h2>
+        <div class="grid-layout">
+            <div class="grid-card" style="text-align: center; border-color: rgba(239,68,68,0.3);">
                 <h3>📞 Línea 100</h3>
-                <div class="help-number">100</div>
-                <p>Servicio gratuito del MIMP para orientación, consejería y soporte emocional en casos de violencia (24/7).</p>
+                <div class="highlight-data">100</div>
+                <p style="font-size: 0.9rem; color: var(--text-muted);">Servicio gratuito del MIMP para orientación, consejería y soporte emocional (24/7).</p>
             </div>
-            
-            <div class="help-card glass-panel">
+            <div class="grid-card" style="text-align: center; border-color: rgba(239,68,68,0.3);">
                 <h3>🚓 Policía Nacional</h3>
-                <div class="help-number">105</div>
-                <p>Para denuncias o emergencias inmediatas que requieran intervención policial rápida.</p>
+                <div class="highlight-data">105</div>
+                <p style="font-size: 0.9rem; color: var(--text-muted);">Para denuncias o emergencias inmediatas que requieran intervención rápida.</p>
             </div>
-
-            <div class="help-card glass-panel" style="grid-column: 1 / -1;">
-                <h3>💬 Chat 100</h3>
-                <p>Servicio confidencial por chat para adolescentes y jóvenes.</p>
-                <br>
+            <div class="content-card" style="grid-column: 1 / -1; margin-bottom: 0;">
                 <h3>📍 Centros Emergencia Mujer (CEM) Arequipa</h3>
-                <p>Atención integral gratuita (psicológica, legal y social) en la región Arequipa.</p>
-                <div style="margin-top: 1rem; padding: 2rem; background: rgba(0,0,0,0.3); border-radius: 12px; border: 1px dashed var(--glass-border);">
-                    <em>[Componente Interactivo: Tabla con direcciones de CEM Comisaría Yanahuara, Hunter, Cerro Colorado y Mapa Embebido de Google Maps]</em>
+                <p>Atención integral gratuita (psicológica, legal y social) en la región.</p>
+                <div style="margin-top: 1rem; padding: 2rem; background: rgba(0,0,0,0.5); border-radius: 12px; border: 1px dashed rgba(255,255,255,0.1);">
+                    <em>[Componente: Tabla direcciones CEM Comisaría Yanahuara, Hunter, Cerro Colorado y Mapa Google Maps]</em>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SECCIÓN 6: RECURSOS -->
-    <section class="section-container" id="recursos">
-        <h2 class="section-title">Recursos y Campañas</h2>
-        <div class="glass-panel content-box" style="text-align: center;">
-            <!-- -->
-            <p><em>Descarga y comparte nuestros afiches para difundir en tu colegio, universidad o comunidad.</em></p>
-            <div style="display: flex; gap: 1rem; justify-content: center; margin: 2rem 0;">
-                <div style="width: 150px; height: 200px; background: rgba(255,255,255,0.05); border-radius: 8px;">[Afiche 1]</div>
-                <div style="width: 150px; height: 200px; background: rgba(255,255,255,0.05); border-radius: 8px;">[Afiche 2]</div>
-            </div>
-            <a href="#" class="btn-glass">📥 Descargar Afiches en Alta Calidad</a>
-            
-            <hr style="border-color: var(--glass-border); margin: 3rem 0;">
-            
-            <h3>📲 Feed de Redes Sociales</h3>
-            <p>¡Sigue la conversación en nuestras plataformas!</p>
-            <div style="margin-top: 1rem; height: 150px; background: rgba(0,0,0,0.3); border-radius: 12px; border: 1px dashed var(--glass-border); display: flex; align-items: center; justify-content: center;">
-                <em>[Widget con el feed de Instagram / TikTok embebido @arequiparompesilencio]</em>
-            </div>
-        </div>
-    </section>
-
     <!-- BOTÓN FLOTANTE PERMANENTE -->
-    <!-- -->
-    <a href="#ayuda" class="floating-btn">🚨 SOS - Pedir Ayuda</a>
+    <a href="#ayuda" class="floating-btn">🚨 Pedir Ayuda</a>
 
     <!-- FOOTER -->
-    <footer>
-        <div style="margin-bottom: 1.5rem; font-size: 1.5rem; letter-spacing: 15px;">
-            <!-- -->
-            <a href="#" style="color: white; text-decoration: none;">📱</a>
-            <a href="#" style="color: white; text-decoration: none;">📸</a>
-            <a href="#" style="color: white; text-decoration: none;">📘</a>
-        </div>
-        <!-- -->
-        <p class="legal-notice"><strong>Aviso Legal:</strong> Este sitio web es un proyecto de carácter informativo, educativo y de concientización social. En caso de una emergencia real, acuda a las autoridades o llame al 105 / Línea 100.</p>
+    <footer style="text-align: center; padding: 4rem 5% 2rem; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 2rem;">
+        <p style="font-size: 0.8rem; color: var(--text-muted); max-width: 600px; margin: 0 auto;"><strong>Aviso Legal:</strong> Este sitio web es un proyecto de carácter informativo, educativo y de concientización social. En caso de una emergencia real, acuda a las autoridades o llame al 105 / Línea 100.</p>
     </footer>
 
 </body>
