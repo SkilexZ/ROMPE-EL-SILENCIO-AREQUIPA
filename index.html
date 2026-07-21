@@ -1,1 +1,247 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rompe el Silencio Arequipa | Prevención e Información</title>
+    <!-- Fuente moderna de Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- VARIABLES Y RESET --- */
+        :root {
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            --text-light: #ffffff;
+            --text-muted: #e0e0e0;
+            --accent-blue: #0056b3;
+        }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        /* --- FONDO DE PANTALLA --- */
+        body {
+            /* REEMPLAZA ESTA URL CON LA IMAGEN DE TU CLIENTE */
+            background-image: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.8)), url('ruta-a-tu-imagen.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* --- NAVEGACIÓN (LIQUID GLASS) --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #8bb4f3;
+        }
+
+        /* --- SECCIÓN HERO (IMPACTO VISUAL) --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 10%;
+            margin-top: 60px;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 5vw, 6rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 4px 10px rgba(0,0,0,0.5);
+            text-transform: uppercase;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        /* --- CONTENEDOR DE SECCIONES --- */
+        .container {
+            padding: 5rem 10%;
+            display: flex;
+            flex-direction: column;
+            gap: 4rem;
+        }
+
+        /* --- TARJETAS DE CONTENIDO (LIQUID GLASS) --- */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: var(--glass-shadow);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .glass-card h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            border-left: 5px solid var(--accent-blue);
+            padding-left: 1rem;
+        }
+
+        .glass-card p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .glass-card ul {
+            list-style-position: inside;
+            color: var(--text-muted);
+            margin-left: 1rem;
+        }
+
+        .glass-card li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            .hero {
+                padding: 0 5%;
+            }
+            .container {
+                padding: 3rem 5%;
+            }
+            .glass-card {
+                padding: 2rem;
+            }
+            .glass-card h2 {
+                font-size: 2rem;
+            }
+            .logo {
+                font-size: 0.9rem; /* Un poco más pequeño en móviles para que entre bien el nombre largo */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- BARRA DE NAVEGACIÓN -->
+    <nav>
+        <div class="logo">Rompe el Silencio Arequipa</div>
+        <ul class="nav-links">
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#quienes-somos">Quiénes Somos</a></li>
+            <li><a href="#investigaciones">Investigaciones</a></li>
+            <li><a href="#prevencion">Prevención</a></li>
+        </ul>
+    </nav>
+
+    <!-- SECCIÓN PRINCIPAL (HERO) -->
+    <section class="hero" id="inicio">
+        <h1>Rompe<br>el silencio.</h1>
+        <p>Iniciativa en Arequipa dedicada a la promoción de la cultura de paz, el respeto mutuo y la prevención de cualquier forma de violencia dentro de la comunidad de la UNSA.</p>
+    </section>
+
+    <!-- SECCIONES DE INFORMACIÓN -->
+    <div class="container">
+        
+        <!-- QUIÉNES SOMOS -->
+        <section id="quienes-somos" class="glass-card">
+            <h2>Quiénes Somos</h2>
+            <p>Somos un equipo interdisciplinario conformado por docentes, estudiantes e investigadores comprometidos con el bienestar de la comunidad de la UNSA. Nuestro objetivo no es sancionar, sino <strong>informar, educar y prevenir</strong>.</p>
+            <p>Creemos firmemente que a través de la educación y la visibilización de las problemáticas sociales, podemos erradicar conductas nocivas y fomentar un entorno académico de excelencia y empatía.</p>
+        </section>
+
+        <!-- INVESTIGACIONES -->
+        <section id="investigaciones" class="glass-card">
+            <h2>Investigaciones y Datos</h2>
+            <p>El primer paso para resolver un problema es entenderlo. Aquí presentamos los hallazgos más recientes sobre dinámicas sociales en el entorno académico:</p>
+            <ul>
+                <li>Estudio sobre el impacto del estrés académico en las relaciones interpersonales (2025).</li>
+                <li>Análisis de microagresiones en entornos de debate y laboratorios.</li>
+                <li>Estrategias de comunicación asertiva en trabajos grupales universitarios.</li>
+            </ul>
+            <p><em>* Todos los documentos detallados están disponibles en la biblioteca central para su consulta.</em></p>
+        </section>
+
+        <!-- PREVENCIÓN Y RECURSOS -->
+        <section id="prevencion" class="glass-card">
+            <h2>Prevención y Recursos</h2>
+            <p>La prevención requiere de la participación activa de todos. Existen diferentes mecanismos y protocolos diseñados para proteger y orientar a los estudiantes:</p>
+            <ul>
+                <li><strong>Identificación temprana:</strong> Aprende a reconocer señales de relaciones asimétricas o conductas de riesgo.</li>
+                <li><strong>Rutas de orientación:</strong> Conoce los reglamentos universitarios que amparan tu integridad y bienestar.</li>
+                <li><strong>Talleres de integración:</strong> Participación en actividades extracurriculares diseñadas para fomentar la tolerancia y el trabajo en equipo.</li>
+            </ul>
+        </section>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 Rompe el Silencio Arequipa. Un espacio informativo y de prevención.</p>
+    </footer>
+
+</body>
+</html>
