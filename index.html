@@ -15,7 +15,7 @@
             --accent-red: #ef4444;
             --glass-btn-bg: rgba(255, 255, 255, 0.05);
             --glass-btn-border: rgba(255, 255, 255, 0.2);
-            --card-bg: rgba(15, 15, 15, 0.85);
+            --card-bg: rgba(20, 20, 20, 0.95);
         }
 
         * {
@@ -38,7 +38,7 @@
         ::-webkit-scrollbar-track { background: var(--bg-dark); }
         ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 4px; }
 
-        /* --- FONDO OPTIMIZADO PARA CERO LAG --- */
+        /* --- IMAGEN DE FONDO (FIJA Y SIN LAG) --- */
         .fixed-bg {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
@@ -48,30 +48,29 @@
             z-index: -2;
         }
 
-        .bg-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background: linear-gradient(to right, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.7) 50%, rgba(0,0,0,0.5) 100%);
-            z-index: -1;
-        }
-
         /* --- NAVEGACIÓN --- */
         nav {
-            position: fixed; top: 0; width: 100%; padding: 1.2rem 4%;
+            position: fixed; top: 0; width: 100%; padding: 1.5rem 4%;
             display: flex; justify-content: space-between; align-items: center;
             z-index: 1000;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 100%);
+            /* Ligero oscurecimiento solo en la parte superior para que los links se lean siempre */
+            background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, transparent 100%);
         }
 
+        /* Logo Glassmorphism (Transparente al fondo) */
         .logo-wrapper {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            padding: 5px 15px; border-radius: 50px;
+            background: rgba(255, 255, 255, 0.15); /* Muy transparente */
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            padding: 8px 25px; 
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
             display: flex; align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
-        .logo-wrapper img { height: 35px; }
+        /* LOGO MUCHO MÁS GRANDE */
+        .logo-wrapper img { height: 75px; }
 
         .nav-center {
             display: flex; gap: 2.5rem; list-style: none;
@@ -82,52 +81,67 @@
             color: var(--text-main); text-decoration: none;
             font-size: 0.75rem; font-weight: 600; letter-spacing: 1.5px;
             text-transform: uppercase; transition: color 0.3s;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8); /* Sombra para que resalte en cualquier fondo */
         }
 
-        .nav-center a:hover { color: var(--text-muted); }
+        .nav-center a:hover { color: #d4d4d8; }
 
         .nav-right { display: flex; }
 
         /* --- BOTONES LIQUID GLASS --- */
         .btn-glass {
-            background: var(--glass-btn-bg);
-            backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
             border: 1px solid var(--glass-btn-border);
-            color: white; padding: 0.6rem 1.5rem; border-radius: 50px;
+            color: white; padding: 0.8rem 1.8rem; border-radius: 50px;
             text-decoration: none; font-size: 0.75rem; font-weight: 600;
             letter-spacing: 1px; text-transform: uppercase;
             transition: all 0.3s ease; cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
-        .btn-glass:hover { background: rgba(255, 255, 255, 0.15); transform: translateY(-2px); }
-        .btn-glass.red { border-color: rgba(239, 68, 68, 0.5); color: #ff8a8a; }
-        .btn-glass.red:hover { background: rgba(239, 68, 68, 0.2); }
+        .btn-glass:hover { background: rgba(255, 255, 255, 0.2); transform: translateY(-2px); }
+        .btn-glass.red { border-color: rgba(239, 68, 68, 0.6); color: #ff9999; background: rgba(239, 68, 68, 0.15); }
+        .btn-glass.red:hover { background: rgba(239, 68, 68, 0.3); }
 
-        /* --- SECCIÓN HERO --- */
+        /* --- SECCIÓN HERO (CON FADE AL NEGRO) --- */
         .hero {
             min-height: 100vh; display: flex; flex-direction: column;
             justify-content: center; padding: 0 8%; position: relative;
+            z-index: 1;
+            /* Aquí ocurre la magia: Inicia casi transparente y termina en negro sólido abajo */
+            background: linear-gradient(to bottom, rgba(5,5,5,0.1) 0%, rgba(5,5,5,0.3) 60%, var(--bg-dark) 100%);
         }
 
         .hero-badge {
-            display: inline-block; border: 1px solid rgba(255,255,255,0.2);
-            padding: 0.4rem 1rem; border-radius: 50px; font-size: 0.75rem;
+            display: inline-block; border: 1px solid rgba(255,255,255,0.3);
+            padding: 0.5rem 1.2rem; border-radius: 50px; font-size: 0.75rem;
             letter-spacing: 1px; text-transform: uppercase;
-            color: var(--text-muted); margin-bottom: 1.5rem; width: fit-content;
+            color: #fff; margin-bottom: 1.5rem; width: fit-content;
+            background: rgba(0,0,0,0.3); backdrop-filter: blur(5px);
         }
 
         .hero h1 {
             font-family: 'Poppins', sans-serif; font-size: clamp(2.5rem, 5vw, 5rem);
             font-weight: 800; line-height: 1.1; margin-bottom: 1.5rem; max-width: 900px;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.8);
         }
 
         .hero p {
-            font-size: 1.1rem; color: var(--text-muted); max-width: 700px; margin-bottom: 2.5rem;
+            font-size: 1.2rem; color: #f4f4f5; max-width: 700px; margin-bottom: 2.5rem;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.8);
         }
 
         .hero-buttons { display: flex; gap: 1rem; }
 
-        /* --- CONTENEDORES --- */
+        /* --- CONTENEDOR DE FONDO SÓLIDO (Todo lo que está debajo del inicio) --- */
+        .solid-bg-sections {
+            background-color: var(--bg-dark);
+            position: relative;
+            z-index: 1;
+        }
+
+        /* --- ESTRUCTURA DE SECCIONES --- */
         .section-container { max-width: 1100px; margin: 0 auto; padding: 6rem 5%; }
         
         .section-title {
@@ -171,15 +185,16 @@
         @media (max-width: 900px) {
             .nav-center { display: none; }
             .hero h1 { font-size: 2.5rem; }
-            .hero { padding-top: 120px; }
+            .hero { padding-top: 150px; }
             .content-card { padding: 1.5rem; }
+            .logo-wrapper img { height: 50px; } /* Ajuste del logo para celular */
         }
     </style>
 </head>
 <body>
 
+    <!-- CAPA DE IMAGEN FIJA AL FONDO -->
     <div class="fixed-bg"></div>
-    <div class="bg-overlay"></div>
 
     <nav>
         <div class="logo-wrapper">
@@ -197,7 +212,7 @@
         </div>
     </nav>
 
-    <!-- INICIO -->
+    <!-- INICIO (Aquí se ve la imagen y se empieza a difuminar al llegar abajo) -->
     <section class="hero" id="inicio">
         <div class="hero-badge">Iniciativa Universitaria</div>
         <h1>¡BIENVENIDOS A AREQUIPA ROMPE EL SILENCIO!</h1>
@@ -209,128 +224,132 @@
         </div>
     </section>
 
-    <!-- QUIÉNES SOMOS -->
-    <section class="section-container" id="quienes-somos" style="padding-top: 0;">
-        <h2 class="section-title">¿Cuál es nuestro objetivo?</h2>
-        <div class="content-card">
-            <p>Somos una iniciativa comprometida con visibilizar una realidad que afecta el desarrollo, la salud y la tranquilidad de nuestra ciudad. Queremos transformar las cifras y estadísticas en acción real:</p>
+    <!-- A partir de aquí, el fondo se vuelve negro sólido -->
+    <div class="solid-bg-sections">
+
+        <!-- QUIÉNES SOMOS -->
+        <section class="section-container" id="quienes-somos" style="padding-top: 2rem;">
+            <h2 class="section-title">¿Cuál es nuestro objetivo?</h2>
+            <div class="content-card">
+                <p>Somos una iniciativa comprometida con visibilizar una realidad que afecta el desarrollo, la salud y la tranquilidad de nuestra ciudad. Queremos transformar las cifras y estadísticas en acción real:</p>
+                
+                <div class="grid-3">
+                    <div class="grid-card" style="text-align: center; border-color: rgba(255,255,255,0.1);">
+                        <h3>📊 Informar</h3>
+                        <p class="text-muted">Informar con datos reales.</p>
+                    </div>
+                    <div class="grid-card" style="text-align: center; border-color: rgba(255,255,255,0.1);">
+                        <h3>🧠 Educar</h3>
+                        <p class="text-muted">Educar para prevenir.</p>
+                    </div>
+                    <div class="grid-card" style="text-align: center; border-color: rgba(255,255,255,0.1);">
+                        <h3>🤝 Construir</h3>
+                        <p class="text-muted">Construir una red de apoyo.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LA REALIDAD EN AREQUIPA -->
+        <section class="section-container" id="datos">
+            <h2 class="section-title">La Realidad en Arequipa</h2>
+            <div class="content-card">
+                <p style="font-size: 1.2rem; margin-bottom: 1rem;">Arequipa tiene un problema de violencia y las cifras lo demuestran.</p>
+                <p style="color: var(--text-muted); margin-bottom: 2rem;">La violencia familiar no es un asunto privado, es un problema de salud pública que nos afecta a todos. Según datos oficiales del INEI y del Centro Emergencia Mujer (CEM), Arequipa se posiciona como una de las regiones con mayores índices de violencia en el Perú.</p>
+                
+                <div class="grid-3">
+                    <div style="padding: 1rem; border-left: 3px solid var(--accent-red);">
+                        <div class="highlight-data">2°</div>
+                        <p>Lugar a nivel nacional en denuncias por violencia.</p>
+                    </div>
+                    <div style="padding: 1rem; border-left: 3px solid var(--accent-red);">
+                        <div class="highlight-data">50.8%</div>
+                        <p>De los reportes corresponden a violencia psicológica.</p>
+                    </div>
+                    <div style="padding: 1rem; border-left: 3px solid var(--accent-red);">
+                        <div class="highlight-data">33.6%</div>
+                        <p>Corresponden a violencia física.</p>
+                    </div>
+                </div>
+
+                <div style="margin-top: 3rem; padding: 1.5rem; background: rgba(239, 68, 68, 0.1); border-radius: 12px; border: 1px solid rgba(239, 68, 68, 0.2);">
+                    <p><strong>⚠️ Población más vulnerable:</strong> La mayoría de las víctimas son mujeres, niños y jóvenes de entre 18 y 59 años.</p>
+                    <p style="margin-top: 0.5rem;">No dejemos que estos datos se vuelvan solo un número más. Si presencias o vives una situación de violencia, busca ayuda.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ENTORNOS Y TIPOS DE VIOLENCIA -->
+        <section class="section-container" id="entornos">
+            <h2 class="section-title">Los Rostros de la Violencia</h2>
+            <p style="margin-bottom: 2rem; color: var(--text-muted);">La violencia nos rodea en distintos entornos. No siempre deja marcas físicas. Identifícala a tiempo.</p>
             
-            <div class="grid-3">
-                <div class="grid-card" style="text-align: center; border-color: rgba(255,255,255,0.1);">
-                    <h3>📊 Informar</h3>
-                    <p class="text-muted">Informar con datos reales.</p>
+            <div class="grid-layout">
+                <div class="grid-card">
+                    <h3>🗣️ Violencia Psicológica y Verbal</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-muted);">Humillaciones, control, insultos y manipulación. (Representa más del 50% de casos reportados).</p>
                 </div>
-                <div class="grid-card" style="text-align: center; border-color: rgba(255,255,255,0.1);">
-                    <h3>🧠 Educar</h3>
-                    <p class="text-muted">Educar para prevenir.</p>
+                <div class="grid-card">
+                    <h3>👊 Violencia Física</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-muted);">Golpes, empujones o cualquier agresión que vulnera tu integridad.</p>
                 </div>
-                <div class="grid-card" style="text-align: center; border-color: rgba(255,255,255,0.1);">
-                    <h3>🤝 Construir</h3>
-                    <p class="text-muted">Construir una red de apoyo.</p>
+                <div class="grid-card">
+                    <h3>📱 Violencia Digital</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-muted);">Acompañamiento no deseado, acoso en redes sociales, difusión de contenido privado sin consentimiento.</p>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- LA REALIDAD EN AREQUIPA (NUEVA SECCIÓN DE DATOS) -->
-    <section class="section-container" id="datos">
-        <h2 class="section-title">La Realidad en Arequipa</h2>
-        <div class="content-card">
-            <p style="font-size: 1.2rem; margin-bottom: 1rem;">Arequipa tiene un problema de violencia y las cifras lo demuestran.</p>
-            <p style="color: var(--text-muted); margin-bottom: 2rem;">La violencia familiar no es un asunto privado, es un problema de salud pública que nos afecta a todos. Según datos oficiales del INEI y del Centro Emergencia Mujer (CEM), Arequipa se posiciona como una de las regiones con mayores índices de violencia en el Perú.</p>
-            
-            <div class="grid-3">
-                <div style="padding: 1rem; border-left: 3px solid var(--accent-red);">
-                    <div class="highlight-data">2°</div>
-                    <p>Lugar a nivel nacional en denuncias por violencia.</p>
+                <div class="grid-card">
+                    <h3>🚶 Acoso Callejero y Urbano</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-muted);">Intimidación y agresiones verbales o físicas en la vía pública o transporte.</p>
                 </div>
-                <div style="padding: 1rem; border-left: 3px solid var(--accent-red);">
-                    <div class="highlight-data">50.8%</div>
-                    <p>De los reportes corresponden a violencia psicológica.</p>
-                </div>
-                <div style="padding: 1rem; border-left: 3px solid var(--accent-red);">
-                    <div class="highlight-data">33.6%</div>
-                    <p>Corresponden a violencia física.</p>
+                <div class="grid-card">
+                    <h3>🏫 Acoso Escolar y Laboral</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-muted);">Bullying/Mobbing: Hostigamiento sistemático en espacios de estudio o trabajo.</p>
                 </div>
             </div>
+        </section>
 
-            <div style="margin-top: 3rem; padding: 1.5rem; background: rgba(239, 68, 68, 0.1); border-radius: 12px; border: 1px solid rgba(239, 68, 68, 0.2);">
-                <p><strong>⚠️ Población más vulnerable:</strong> La mayoría de las víctimas son mujeres, niños y jóvenes de entre 18 y 59 años.</p>
-                <p style="margin-top: 0.5rem;">No dejemos que estos datos se vuelvan solo un número más. Si presencias o vives una situación de violencia, busca ayuda.</p>
-            </div>
-        </div>
-    </section>
+        <!-- SECCIÓN INVESTIGACIÓN -->
+        <section class="section-container" id="investigacion">
+            <h2 class="section-title">Nuestra Investigación</h2>
+            <div class="content-card" style="text-align: center;">
+                <p style="color: var(--text-muted); margin-bottom: 2rem;">Lee nuestro estudio completo sobre el panorama estadístico y social en la región.</p>
+                
+                <div style="height: 500px; background: rgba(0,0,0,0.8); margin: 0 auto 2rem auto; border-radius: 12px; display: flex; align-items: center; justify-content: center; border: 1px dashed rgba(255,255,255,0.2); max-width: 800px;">
+                    <p style="color: var(--text-muted);">[Aquí irá embebido tu PDF]</p>
+                </div>
 
-    <!-- ENTORNOS Y TIPOS DE VIOLENCIA -->
-    <section class="section-container" id="entornos">
-        <h2 class="section-title">Los Rostros de la Violencia</h2>
-        <p style="margin-bottom: 2rem; color: var(--text-muted);">La violencia nos rodea en distintos entornos. No siempre deja marcas físicas. Identifícala a tiempo.</p>
-        
-        <div class="grid-layout">
-            <div class="grid-card">
-                <h3>🗣️ Violencia Psicológica y Verbal</h3>
-                <p style="font-size: 0.9rem; color: var(--text-muted);">Humillaciones, control, insultos y manipulación. (Representa más del 50% de casos reportados).</p>
+                <a href="#" class="btn-glass">📄 Descargar Investigación (PDF)</a>
             </div>
-            <div class="grid-card">
-                <h3>👊 Violencia Física</h3>
-                <p style="font-size: 0.9rem; color: var(--text-muted);">Golpes, empujones o cualquier agresión que vulnera tu integridad.</p>
-            </div>
-            <div class="grid-card">
-                <h3>📱 Violencia Digital</h3>
-                <p style="font-size: 0.9rem; color: var(--text-muted);">Acompañamiento no deseado, acoso en redes sociales, difusión de contenido privado sin consentimiento.</p>
-            </div>
-            <div class="grid-card">
-                <h3>🚶 Acoso Callejero y Urbano</h3>
-                <p style="font-size: 0.9rem; color: var(--text-muted);">Intimidación y agresiones verbales o físicas en la vía pública o transporte.</p>
-            </div>
-            <div class="grid-card">
-                <h3>🏫 Acoso Escolar y Laboral</h3>
-                <p style="font-size: 0.9rem; color: var(--text-muted);">Bullying/Mobbing: Hostigamiento sistemático en espacios de estudio o trabajo.</p>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- SECCIÓN INVESTIGACIÓN (SOLO PDF Y DESCARGA) -->
-    <section class="section-container" id="investigacion">
-        <h2 class="section-title">Nuestra Investigación</h2>
-        <div class="content-card" style="text-align: center;">
-            <p style="color: var(--text-muted); margin-bottom: 2rem;">Lee nuestro estudio completo sobre el panorama estadístico y social en la región.</p>
-            
-            <!-- Visor del PDF -->
-            <div style="height: 500px; background: rgba(0,0,0,0.8); margin: 0 auto 2rem auto; border-radius: 12px; display: flex; align-items: center; justify-content: center; border: 1px dashed rgba(255,255,255,0.2); max-width: 800px;">
-                <p style="color: var(--text-muted);">[Aquí irá embebido tu PDF]</p>
+        <!-- DIRECTORIO DE AYUDA -->
+        <section class="section-container" id="ayuda">
+            <h2 class="section-title">¡No guardes silencio! Busca ayuda</h2>
+            <div class="grid-layout">
+                <div class="grid-card" style="text-align: center; border-color: rgba(239,68,68,0.3);">
+                    <h3>📞 Línea 100</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-muted);">Atención gratuita 24/7.</p>
+                </div>
+                <div class="grid-card" style="text-align: center; border-color: rgba(239,68,68,0.3);">
+                    <h3>📍 Centros Emergencia Mujer</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-muted);">CEM en Arequipa. Atención integral.</p>
+                </div>
+                <div class="grid-card" style="text-align: center; border-color: rgba(239,68,68,0.3);">
+                    <h3>📱 Redes Sociales</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-muted);">@arequiparompelsilencio</p>
+                </div>
             </div>
+        </section>
 
-            <a href="#" class="btn-glass">📄 Descargar Investigación (PDF)</a>
-        </div>
-    </section>
+        <!-- FOOTER -->
+        <footer style="text-align: center; padding: 4rem 5% 2rem; border-top: 1px solid rgba(255,255,255,0.05);">
+            <p style="font-size: 0.8rem; color: var(--text-muted); max-width: 600px; margin: 0 auto;">Arequipa Rompe el Silencio. Proyecto informativo y de concientización social.</p>
+        </footer>
 
-    <!-- DIRECTORIO DE AYUDA -->
-    <section class="section-container" id="ayuda">
-        <h2 class="section-title">¡No guardes silencio! Busca ayuda</h2>
-        <div class="grid-layout">
-            <div class="grid-card" style="text-align: center; border-color: rgba(239,68,68,0.3);">
-                <h3>📞 Línea 100</h3>
-                <p style="font-size: 0.9rem; color: var(--text-muted);">Atención gratuita 24/7.</p>
-            </div>
-            <div class="grid-card" style="text-align: center; border-color: rgba(239,68,68,0.3);">
-                <h3>📍 Centros Emergencia Mujer</h3>
-                <p style="font-size: 0.9rem; color: var(--text-muted);">CEM en Arequipa. Atención integral.</p>
-            </div>
-            <div class="grid-card" style="text-align: center; border-color: rgba(239,68,68,0.3);">
-                <h3>📱 Redes Sociales</h3>
-                <p style="font-size: 0.9rem; color: var(--text-muted);">@arequiparompelsilencio</p>
-            </div>
-        </div>
-    </section>
+    </div> <!-- FIN DE SOLID BG SECTIONS -->
 
     <!-- BOTÓN FLOTANTE PERMANENTE -->
     <a href="#ayuda" class="floating-btn">🚨 SOS Ayuda</a>
-
-    <!-- FOOTER -->
-    <footer style="text-align: center; padding: 4rem 5% 2rem; border-top: 1px solid rgba(255,255,255,0.05);">
-        <p style="font-size: 0.8rem; color: var(--text-muted); max-width: 600px; margin: 0 auto;">Arequipa Rompe el Silencio. Proyecto informativo y de concientización social.</p>
-    </footer>
 
 </body>
 </html>
