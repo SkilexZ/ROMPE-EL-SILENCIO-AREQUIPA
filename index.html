@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="google-site-verification" content="vMef12ixBuztwevJRn9growrJO2rIP_ZQCH6YK0H--g" />
+    <meta name="google-site-verification" content="vMef12ixBuztwevJRn9growrJ02rIP_ZQCH6YK0H--g" />
     <title>Arequipa Rompe el Silencio</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Poppins:wght@700&display=swap" rel="stylesheet">
     
@@ -44,7 +44,7 @@
         .fixed-bg {
             position: fixed;
             top: 0; left: 0; width: 100vw; 
-            height: 100vh; height: 100dvh; /* Soporte dinámico para móviles */
+            height: 100vh; height: 100dvh;
             background-image: url('fondoar.webp'); 
             background-size: cover;
             background-position: center;
@@ -61,19 +61,22 @@
             -webkit-backdrop-filter: blur(5px);
         }
 
-        /* Logo Glassmorphism */
+        /* Logo Liquid Glass Más Claro y Grande */
         .logo-wrapper {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            padding: 6px 18px; 
+            background: rgba(255, 255, 255, 0.5); /* Más claro y luminoso */
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 8px 22px; 
             border-radius: 50px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.8);
             display: flex; align-items: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 25px rgba(255, 255, 255, 0.2);
         }
 
-        .logo-wrapper img { height: 50px; width: auto; }
+        .logo-wrapper img { 
+            height: 85px; /* Agrandado para legibilidad perfecta */
+            width: auto; 
+        }
 
         .nav-center {
             display: flex; gap: 2rem; list-style: none;
@@ -224,11 +227,11 @@
                 display: flex;
             }
 
-            .nav-right { display: none; } /* El botón de ayuda ya está en el menú desplegable y flotante */
+            .nav-right { display: none; }
             
             .hero { padding: 0 6%; text-align: left; }
             .hero h1 { font-size: 2.3rem; }
-            .logo-wrapper img { height: 40px; }
+            .logo-wrapper img { height: 60px; } /* Ajuste proporcional para celulares */
         }
     </style>
 </head>
@@ -417,7 +420,6 @@
             navCenter.classList.toggle('active');
         });
 
-        // Cierra el menú automáticamente al hacer clic en cualquier opción
         document.querySelectorAll('.nav-center a').forEach(link => {
             link.addEventListener('click', () => {
                 navCenter.classList.remove('active');
@@ -427,4 +429,3 @@
 
 </body>
 </html>
-
